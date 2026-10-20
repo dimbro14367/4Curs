@@ -1,0 +1,38 @@
+﻿<Window x:Class="InsuranceApp.AddInsuranceTypeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Новый вид страхования"
+        Height="260" Width="440"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource LightBgBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource AccentBrush}" Padding="20,18">
+            <TextBlock Text="Новый вид страхования" FontSize="18"
+                       FontWeight="Bold" Foreground="White"/>
+        </Border>
+
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Название *" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBox x:Name="txtTypeName" Height="34"/>
+        </StackPanel>
+
+        <Border Grid.Row="2" Background="White" BorderBrush="#BDC3C7"
+                BorderThickness="0,1,0,0" Padding="20,12">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Отмена" Click="BtnCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Background="#95A5A6" Padding="20,10" Margin="0,0,10,0"/>
+                <Button Content="Сохранить" Click="BtnSave_Click"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Background="{StaticResource GreenBrush}" Padding="20,10"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

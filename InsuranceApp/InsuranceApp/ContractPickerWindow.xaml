@@ -1,0 +1,59 @@
+﻿<Window x:Class="InsuranceApp.ContractPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Выбор клиента"
+        Height="560" Width="720"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource LightBgBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource AccentBrush}" Padding="20,18">
+            <StackPanel>
+                <TextBlock Text="Выбор клиента для оформления договора" FontSize="18"
+                           FontWeight="Bold" Foreground="White"/>
+                <TextBlock Text="Выберите клиента из списка и нажмите «Далее»"
+                           FontSize="11" Foreground="#D6EAF8" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20,15,20,10">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="0,0,8,0" FontWeight="SemiBold"/>
+            <TextBox x:Name="txtSearch" Width="300" Height="30"
+                     TextChanged="TxtSearch_TextChanged"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgClients" Grid.Row="2" Margin="20,0,20,10"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  HeadersVisibility="Column" GridLinesVisibility="Horizontal"
+                  Background="White" RowBackground="White"
+                  AlternatingRowBackground="#F8F9FA" FontSize="13"
+                  MouseDoubleClick="DgClients_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ClientID}" Width="50"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="140"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="120"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}" Width="140"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="3" Background="White" BorderBrush="#BDC3C7"
+                BorderThickness="0,1,0,0" Padding="20,12">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Отмена" Click="BtnCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Background="#95A5A6" Padding="20,10" Margin="0,0,10,0"/>
+                <Button Content="Далее →" Click="BtnNext_Click"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Background="{StaticResource AccentBrush}" Padding="20,10"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

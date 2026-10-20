@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5da0aeb75c744b68bf3444eff8021f0b" Name="Diagram1">
+        <EntityTypeShape EntityType="user30_dbModel.ins_Clients" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="user30_dbModel.ins_InsuranceCases" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="user30_dbModel.ins_InsuranceContracts" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="user30_dbModel.ins_InsuranceTypes" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="user30_dbModel.ins_Roles" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="user30_dbModel.ins_UserContractWork" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="user30_dbModel.ins_Users" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Contracts_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Cases_Contracts" ManuallyRouted="false" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Contracts_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Contracts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Work_Contracts" ManuallyRouted="false" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="user30_dbModel.FK_ins_Work_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

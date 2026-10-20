@@ -1,0 +1,78 @@
+﻿<Window x:Class="InsuranceApp.AddClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Новый клиент"
+        Height="640" Width="480"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource LightBgBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}" Padding="20,18">
+            <StackPanel>
+                <TextBlock Text="Регистрация нового клиента" FontSize="18"
+                           FontWeight="Bold" Foreground="White"/>
+                <TextBlock Text="Заполните данные клиента для добавления в базу"
+                           FontSize="11" Foreground="#BDC3C7" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Форма -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Фамилия *" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtLastName" Height="34" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Имя *" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtFirstName" Height="34" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Отчество" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtMiddleName" Height="34" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Дата рождения *" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <DatePicker x:Name="dpBirthDate" Height="34" Margin="0,0,0,12"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Серия паспорта" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtPassportSeries" Height="34"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Номер паспорта" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBox x:Name="txtPassportNumber" Height="34"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Адрес" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtAddress" Height="34" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Телефон" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtPhone" Height="34" Margin="0,0,0,15"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Кнопки -->
+        <Border Grid.Row="2" Background="White" BorderBrush="#BDC3C7"
+                BorderThickness="0,1,0,0" Padding="20,12">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Отмена" Click="BtnCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Background="#95A5A6" Padding="20,10" Margin="0,0,10,0"/>
+                <Button Content="Сохранить" Click="BtnSave_Click"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Background="{StaticResource GreenBrush}" Padding="20,10"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

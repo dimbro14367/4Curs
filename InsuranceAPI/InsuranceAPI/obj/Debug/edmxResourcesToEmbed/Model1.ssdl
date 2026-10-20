@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище user30_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ins_Clients">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="date" Nullable="false" />
+    <Property Name="PassportSeries" Type="nvarchar" MaxLength="10" />
+    <Property Name="PassportNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="255" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="ins_InsuranceCases">
+    <Key>
+      <PropertyRef Name="CaseID" />
+    </Key>
+    <Property Name="CaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractID" Type="int" Nullable="false" />
+    <Property Name="CaseDate" Type="date" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ins_InsuranceContracts">
+    <Key>
+      <PropertyRef Name="ContractID" />
+    </Key>
+    <Property Name="ContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClientID" Type="int" Nullable="false" />
+    <Property Name="AgentID" Type="int" Nullable="false" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="ConclusionDate" Type="date" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="InsuredSum" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Premium" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsAccept" Type="bit" Nullable="false" />
+    <Property Name="RejectReason" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ins_InsuranceTypes">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ins_Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ins_UserContractWork">
+    <Key>
+      <PropertyRef Name="WorkID" />
+    </Key>
+    <Property Name="WorkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ContractID" Type="int" Nullable="false" />
+    <Property Name="WorkType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WorkDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ins_Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_ins_Cases_Contracts">
+    <End Role="ins_InsuranceContracts" Type="Self.ins_InsuranceContracts" Multiplicity="1" />
+    <End Role="ins_InsuranceCases" Type="Self.ins_InsuranceCases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_InsuranceContracts">
+        <PropertyRef Name="ContractID" />
+      </Principal>
+      <Dependent Role="ins_InsuranceCases">
+        <PropertyRef Name="ContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ins_Contracts_Clients">
+    <End Role="ins_Clients" Type="Self.ins_Clients" Multiplicity="1" />
+    <End Role="ins_InsuranceContracts" Type="Self.ins_InsuranceContracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="ins_InsuranceContracts">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ins_Contracts_Types">
+    <End Role="ins_InsuranceTypes" Type="Self.ins_InsuranceTypes" Multiplicity="1" />
+    <End Role="ins_InsuranceContracts" Type="Self.ins_InsuranceContracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_InsuranceTypes">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="ins_InsuranceContracts">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ins_Contracts_Users">
+    <End Role="ins_Users" Type="Self.ins_Users" Multiplicity="1" />
+    <End Role="ins_InsuranceContracts" Type="Self.ins_InsuranceContracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ins_InsuranceContracts">
+        <PropertyRef Name="AgentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ins_Users_Roles">
+    <End Role="ins_Roles" Type="Self.ins_Roles" Multiplicity="1" />
+    <End Role="ins_Users" Type="Self.ins_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="ins_Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ins_Work_Contracts">
+    <End Role="ins_InsuranceContracts" Type="Self.ins_InsuranceContracts" Multiplicity="1" />
+    <End Role="ins_UserContractWork" Type="Self.ins_UserContractWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_InsuranceContracts">
+        <PropertyRef Name="ContractID" />
+      </Principal>
+      <Dependent Role="ins_UserContractWork">
+        <PropertyRef Name="ContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ins_Work_Users">
+    <End Role="ins_Users" Type="Self.ins_Users" Multiplicity="1" />
+    <End Role="ins_UserContractWork" Type="Self.ins_UserContractWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ins_Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ins_UserContractWork">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище user30_dbModelContainer">
+    <EntitySet Name="ins_Clients" EntityType="Self.ins_Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ins_InsuranceCases" EntityType="Self.ins_InsuranceCases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ins_InsuranceContracts" EntityType="Self.ins_InsuranceContracts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ins_InsuranceTypes" EntityType="Self.ins_InsuranceTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ins_Roles" EntityType="Self.ins_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ins_UserContractWork" EntityType="Self.ins_UserContractWork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ins_Users" EntityType="Self.ins_Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ins_Cases_Contracts" Association="Self.FK_ins_Cases_Contracts">
+      <End Role="ins_InsuranceContracts" EntitySet="ins_InsuranceContracts" />
+      <End Role="ins_InsuranceCases" EntitySet="ins_InsuranceCases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ins_Contracts_Clients" Association="Self.FK_ins_Contracts_Clients">
+      <End Role="ins_Clients" EntitySet="ins_Clients" />
+      <End Role="ins_InsuranceContracts" EntitySet="ins_InsuranceContracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ins_Contracts_Types" Association="Self.FK_ins_Contracts_Types">
+      <End Role="ins_InsuranceTypes" EntitySet="ins_InsuranceTypes" />
+      <End Role="ins_InsuranceContracts" EntitySet="ins_InsuranceContracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ins_Contracts_Users" Association="Self.FK_ins_Contracts_Users">
+      <End Role="ins_Users" EntitySet="ins_Users" />
+      <End Role="ins_InsuranceContracts" EntitySet="ins_InsuranceContracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ins_Users_Roles" Association="Self.FK_ins_Users_Roles">
+      <End Role="ins_Roles" EntitySet="ins_Roles" />
+      <End Role="ins_Users" EntitySet="ins_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ins_Work_Contracts" Association="Self.FK_ins_Work_Contracts">
+      <End Role="ins_InsuranceContracts" EntitySet="ins_InsuranceContracts" />
+      <End Role="ins_UserContractWork" EntitySet="ins_UserContractWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ins_Work_Users" Association="Self.FK_ins_Work_Users">
+      <End Role="ins_Users" EntitySet="ins_Users" />
+      <End Role="ins_UserContractWork" EntitySet="ins_UserContractWork" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
